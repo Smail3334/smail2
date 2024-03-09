@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login to the Site</h2>
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required >
+
+            <label for="password" id="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" onclick="submitForm()">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // إرسال البيانات باستخدام AJAX 
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "process_login.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // يمكنك إضافة مزيد من الرموز هنا بناءً على استجابة الملقم
+                    alert("تم إرسال البيانات بنجاح!");
+                }
+            };
+            xhr.send("email=" + email + "&password=" + password);
+            
+                        // استرجاع قيمة البريد الإلكتروني من حقل الإدخال
+            var email = document.getElementById('email').value;
+
+            // استخراج الحرف الأول من البريد الإلكتروني
+            var userName = email.split('@')[0];
+
+            // حفظ الحرف الأول في Local Storage
+            localStorage.setItem('userInitial', userName);
+            window.location.href = "nyms.html";
+        }
+    </script>
+</body>
+</html>
